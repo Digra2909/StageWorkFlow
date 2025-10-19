@@ -1,0 +1,141 @@
+html,body{
+    size:100% 100%;
+    background-color: black;
+    font-family: sans-serif;
+    color:gray;
+    padding:0;
+    font-size: 20px;
+    margin:0;
+}
+form{
+    margin: auto;
+    margin-top: 150px;
+    border: 1px solid dodgerblue;
+    border-radius : 5px;
+    padding:20px;
+    box-shadow: 1px 1px 20px 5px dodgerblue;
+    
+    }
+#formC{
+    
+    width:400px;
+    height:400px;
+}
+span{
+    color:dodgerblue;
+
+}
+#formC #crea{
+    margin-top: 15px;
+}
+#formC #crea a{
+    font-size: 18px;
+    ;
+}
+.orange{
+    background-color: dodgerblue;
+}
+a,li{
+    text-decoration: none;
+    color:dodgerblue;
+}
+
+h2{
+    color:dodgerblue;
+    text-align: center;
+}
+.no-border{
+    border: none!important;
+}
+header{
+    justify-content: space-between;
+    border-bottom: 1px solid gray;
+    background-color: dodgerblue;
+    width:250px;
+    height:100vh;
+    padding:10px;
+    padding-top:35px;    
+}
+input,button{
+    width:100%;
+    margin-top:10px;
+    height:45px;
+    border:none;
+    padding:5px;
+    color:#fff;
+}
+button,.button{
+    background-color: orange;
+    color:#fff;
+    
+}
+#foot{
+    color:#fff;
+}
+/*---------dashboard-admmin------*/
+header{
+    display:block;
+}
+header div span a{
+    color:#fff;
+
+
+}
+#msg{
+    color:black;
+}
+header nav{
+    margin-top:20px;
+}
+
+/*-----------choix-------------*/
+.choix{
+    width:800px ;
+    height:200px;
+    margin:auto;
+    margin-top: 200px;
+    display:block;
+
+    
+}
+
+.choix:first-child a, .choix:nth-child(2) a{
+    color:#fff;
+    font-size: 3em;
+    
+}
+/*------inscription-----*/
+#formI{
+    height:420px!important;
+    margin:auto;
+    margin-top: 150px;
+    width: 500px;
+}
+section #formI div {
+    margin-top:8px;
+}
+section #formI div a{
+    font-size: 18px;
+}
+
+/*--------ajout Ese*/
+#b-ajE{
+    display: flex;
+
+}
+
+#b-ajE section{
+    padding: 20px;
+}
+#formA{
+    margin:0%;
+    margin-top: 50px;
+    width:500px;
+}
+.t-dodger{
+    background-color: dodgerblue!important;
+}
+.deco-none{
+    box-shadow: none!important;
+}
+
