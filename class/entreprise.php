@@ -164,14 +164,15 @@
             
 
         }
-                public static function toutCandidatureaceptte(){
+        public static function toutCandidatureaceptte(){
 
             //se connecter à la base des données
             $bdd = config::connexion();
 
             //validtion de l'entreprise
             $req = $bdd->prepare(
-                                    "SELECT offres_stage.entreprise_id as entreprise_id,
+                                    "SELECT etudiants.id as id_etud,
+                                            offres_stage.entreprise_id as entreprise_id,
                                             candidatures.id,
                                             candidatures.date_candidature as dte,
                                             offres_stage.titre as objet,
@@ -192,6 +193,16 @@
 
             $liste_Candidature = $req->fetchAll();
             return $liste_Candidature;
+        }
+        public static function creer_stage($stage){
+
+            //se connecter à la base des données
+            $bdd = config::connexion();
+
+            $req  = $bdd->prepare('INSERT INTO stages(date_debut,date_fin,tuteur_id,entreprise_id,etudiant_id)
+                                    VALUES(?,?,?,?,?)');
+            $req->execute($stage);
+
         }
     }
 

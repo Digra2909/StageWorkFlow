@@ -41,6 +41,10 @@ $listeTuteur = entreprise::toutTuteur($_SESSION['entreprise_id']);
                     // Utilisation d'une alerte Bootstrap moderne
                     echo' <div class="alert alert-info text-center" role="alert">'.$_GET['msg'].'</div>';
                 }
+                if(isset($_GET['msgStg'])){
+                    // Utilisation d'une alerte Bootstrap moderne
+                    echo' <div class="alert alert-info text-center" role="alert">'.$_GET['msgStg'].'</div>';
+                }
             ?>
             
             <div class="row g-4">
@@ -128,7 +132,9 @@ $listeTuteur = entreprise::toutTuteur($_SESSION['entreprise_id']);
                                         <input type="hidden" name='descriptions' value='<?=$valeur['descriptions'] ?>'>
                                         <input type="hidden" name='competences_offres' value='<?=$valeur['competences_offres'] ?>'>
                                         <input type="hidden" name='competence_etudiant' value='<?=$valeur['competence_etudiant'] ?>'>
-                                        
+                                        <input type="hidden" name='nomTuteur' value='<?=$tuteur['nomTuteur'] ?>'>
+                                        <input type="hidden" name='idTuteur' value='<?=$tuteur['id'] ?>'>
+                                        <input type="hidden" name='id_etud' value='<?=$valeur['id_etud'] ?>'>
                                         <button class="btn btn-dark w-100 fw-bold mt-2" name="assigner" type="submit" 
                                             <?php echo empty($listeTuteur) ? 'disabled' : ''; // Désactiver si pas de tuteur ?>>
                                             <i class="bi bi-person-fill-up me-2"></i> Assigner l'encadreur

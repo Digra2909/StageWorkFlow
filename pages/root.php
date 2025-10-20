@@ -135,4 +135,10 @@
         header('location:../dashBoard-entreprise/creer_stage.php?donnee='.$stage);
 
     }
+    if(isset($_POST['creer_stage'])){
+        $data = [$_POST['date_debut'],$_POST['date_fin'],$_POST['tuteur'],$_POST['entreprise'],$_POST['etud']];
+        entreprise::creer_stage($data);
+        header('location:../dashBoard-entreprise/assignation_tuteur.php?msgStg=stage pris en compte');
+
+    }
     
