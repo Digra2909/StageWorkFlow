@@ -5,6 +5,7 @@ if(!isset($_SESSION['entreprise_id'])){
 }
 include('../config.php');
 config::autoload(); 
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -99,11 +100,10 @@ config::autoload();
                             </div>
                         </div>
                         
-                        <input type="hidden" name='entreprise' value="<?= $_POST['id'] ?>"> 
+                        <input type="hidden" name='entreprise_id' value="<?= $_SESSION['entreprise_id'] ?>"> 
                         <input type="hidden" name='tuteur' value="<?= $_POST['idTuteur'] ?>"> 
                         <input type="hidden" name='etud' value="<?= $_POST['id_etud'] ?>"> 
-
-                        
+                        <input type="hidden" name='id_offre' value="<?= $_POST['id_offre'] ?>">  
                         <hr class="text-secondary my-4">
 
                         <button type="submit" name='creer_stage' class='btn btn-dark w-100 fw-bold'>

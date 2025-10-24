@@ -82,11 +82,12 @@ session_start();
 
             //recheche
             $req = $bdd->prepare('INSERT INTO users(nomuser,mdp) VALUES(?,?)');
-            $espion = $req->execute(array($this->pseudo,$this->mdp));
+            $espion = $req->execute(array($this->pseudo,sha1($this->mdp)));
 
             if($espion){ return $espion = TRUE; }
             } catch (Exception $e) {
                echo $e;
+               
             }
         }
 

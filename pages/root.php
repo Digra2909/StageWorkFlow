@@ -1,6 +1,10 @@
 <?php
+
+
     require_once '../config.php';
     config::autoload();
+    config::nettoyerPost();
+
     
     function checkMdp($mot_de_passe1,$mot_de_passe2){
         if ($mot_de_passe1 === $mot_de_passe2){
@@ -9,48 +13,63 @@
             return FALSE;
         }
     }
+    function redirection($url){
+        header('location:'.$url);
+    }
 
 
     if(isset($_POST['cnx'])){
-
-        $reponse = users::authentificationAdmin(array($_POST['pseudo'],$_POST['mdp']));
-        
-        if ($reponse) {
-
-            $_SESSION['name'] = $_POST['pseudo'];
-            header('location:../dashboard-admin');
-        
+        if($testTuteur = enseignant::cnxEnseignant(array($_POST['pseudo'],$_POST['mdp']))){
+            $_SESSION['idTuteur'] = $testTuteur[0]; 
+            redirection('../tableau_de_bord_enseignant/suivi.php');
         }else{
-            
-            $user1 = new users($_POST['pseudo'],$_POST['mdp']);
-            $retour = $user1->authentification();
-
-            if (count($retour) >= 2) {
-            
-                if($retour[0]=='etudiant'){
-            
-                    $_SESSION['id']= $retour[1];
-                    $_SESSION['id_etud']= $retour[2];
-                    $_SESSION['name']= $_POST['pseudo'];
+            if($testTuteur = entreprise::cnxTuteur(array($_POST['pseudo'],$_POST['mdp']))){
+                    
+                        session_start();
+                        $_SESSION['idTuteur'] = $testTuteur[0]; 
+                        redirection('evaluation.php');
                 
-                header("location:../dashboard-etudiant/");
-            
-                }else if($retour[0]=='entreprise'){
-                   
-                    $_SESSION['name']= $_POST['pseudo'];
-                    $_SESSION['entreprise_id']= $retour[1];
-                    $_SESSION['user_id']= $retour[2];
-                    $_SESSION['state_valide']= $retour[3];
+                    }else{
 
-                    header("location:../dashBoard-entreprise/");
-                }    # code...
-            }else{
-                
-                header('location:../pages/connexion.php?msg2=Réessyez!');
+                        $reponse = users::authentificationAdmin(array($_POST['pseudo'],$_POST['mdp']));
+                    
+                        if ($reponse) {
 
-            }
-        }
-        
+                            $_SESSION['name'] = $_POST['pseudo'];
+                            header('location:../dashboard-admin');
+                        
+                        }else{
+                            
+                            $user1 = new users($_POST['pseudo'],$_POST['mdp']);
+                            $retour = $user1->authentification();
+                            if (count($retour) >= 2) {
+                            
+                                
+                                if($retour[0]=='etudiant'){
+                                
+                                    $_SESSION['id']= $retour[1];
+                                    $_SESSION['id_etud']= $retour[2];
+                                    $_SESSION['name']= $_POST['pseudo'];
+                                
+                                header("location:../dashboard-etudiant/");
+                            
+                                }else if($retour[0]=='entreprise'){
+                                
+                                    $_SESSION['name']= $_POST['pseudo'];
+                                    $_SESSION['entreprise_id']= $retour[1];
+                                    $_SESSION['user_id']= $retour[2];
+                                    $_SESSION['state_valide']= $retour[3];
+
+                                    header("location:../dashBoard-entreprise/");
+                                }    # code...
+                            }else{
+                                
+                                header('location:../pages/connexion.php?msg2=Réessyez!');
+
+                            }
+                        }
+                }
+        }        
         
     }
     if (isset($_POST['env'])) {
@@ -127,7 +146,7 @@
         header('location:../dashboard-etudiant/etat_candidature.php?msg=candidature annulée'); 
     }
     if(isset($_POST['enregTuteur'])){
-        entreprise::enregTuteur(array($_POST['nomTuteur'],$_POST["entreprise_id"]));
+        entreprise::enregTuteur(array($_POST['nomTuteur'],$_POST['matricule'],$_POST["entreprise_id"]));
         header('location:../dashBoard-entreprise/enregistrer_tuteur.php?msg=tuteur enregistré');
     }
     if(isset($_POST['assigner'])){
@@ -136,9 +155,37 @@
 
     }
     if(isset($_POST['creer_stage'])){
-        $data = [$_POST['date_debut'],$_POST['date_fin'],$_POST['tuteur'],$_POST['entreprise'],$_POST['etud']];
+        $data = [$_POST['date_debut'],$_POST['date_fin'],$_POST['tuteur'],$_POST['entreprise_id'],$_POST['etud']];
+        $offre = $_POST['id_offre'];
         entreprise::creer_stage($data);
+        entreprise::offrePourvue($offre);
         header('location:../dashBoard-entreprise/assignation_tuteur.php?msgStg=stage pris en compte');
+
+    }
+    if(isset($_POST['inscEnseignant'])){
+        if(checkMdp($_POST['mdpa'],$_POST['mdpb'])){
+            $retour = enseignant::inscription(array($_POST['nom'],$_POST['cours'],$_POST['mail'],$_POST['mdpa']));
+            if($retour){redirection('connexion.php?msg=inscrption effectuée !');}
+        }else{
+            redirection("../tableau_de_bord_enseignant/inscription.php?msg=les mots de passe sont différents");
+
+        }
+    }
+    if(isset($_POST['enregEva'])){
+        $data = array(
+                                            $_POST['connaissance_professionelles'],
+                                            $_POST["rendement"],
+                                            $_POST["esprit_initiative"],
+                                            $_POST["ponctualite_ordre_discioline"],
+                                            $_POST["collaboration_travail_equipe"],
+                                            $_POST["conscience_prof"],
+                                            $_POST["comportement_generale"],
+                                            $_POST["idTuteur"],
+                                            $_POST["id_etudiant"],
+                                            $_POST["id_stage"]
+        );
+        entreprise::evaluerStagiaire($data);
+        redirection('evaluation.php?msg=stagiaire évalué');
 
     }
     

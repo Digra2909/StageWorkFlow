@@ -103,7 +103,10 @@
             $req->execute([$idCand]);
 
         }
+        public static function depotRapport(){
 
+        }
+        
         
     }
 

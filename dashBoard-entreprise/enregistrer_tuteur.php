@@ -8,6 +8,7 @@ config::autoload();
 $entreprise_id = $_SESSION['entreprise_id'];
 $listeTuteur = entreprise::toutTuteur($entreprise_id);
 
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -50,8 +51,9 @@ $listeTuteur = entreprise::toutTuteur($entreprise_id);
                             <div class="mb-4">
                                 <div class="input-group">
                                     <span class="input-group-text bg-light text-dark border-end-0"><i class="bi bi-person-fill"></i></span>
-                                    <input type="hidden" value='<?php echo $entreprise_id ?>' name='entreprise_id'>
                                     <input class="form-control" type="text" name="nomTuteur" placeholder="Nom complet du tuteur" required>
+                                    <input class="form-control " type="text" name="matricule" placeholder="Matricule tuteur" required>
+                                    <input type="hidden" value='<?php echo $entreprise_id ?>' name='entreprise_id'>
                                 </div>
                             </div>
                             
@@ -76,6 +78,7 @@ $listeTuteur = entreprise::toutTuteur($entreprise_id);
                                         <tr>
                                             <th scope='col' class="text-dark">Identifiant</th>
                                             <th scope='col' class="text-dark">Nom</th>
+                                            <th scope='col' class="text-dark">Matricule</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -88,6 +91,8 @@ $listeTuteur = entreprise::toutTuteur($entreprise_id);
                                         <tr>
                                             <td><?=$tuteur[0] ?></td>
                                             <td><?=$tuteur[1] ?></td>
+                                            <td><?=$tuteur[2] ?></td>
+
                                         </tr>
 
                                         <?php 

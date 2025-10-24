@@ -26,7 +26,11 @@ public static function autoload(){
         require_once __DIR__."/class/".$className.".php";
     });
 }
-
+public static function nettoyerPost(){
+    foreach ($_POST as $key => $value) {
+        $_POST[$key] = htmlspecialchars(trim($value));
+    }
+}
 
 
 

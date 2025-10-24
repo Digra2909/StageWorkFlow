@@ -75,8 +75,8 @@ $listeTuteur = entreprise::toutTuteur($_SESSION['entreprise_id']);
                                         <h6 class="text-dark mt-2 mb-3 fw-bold">Détails de l'Offre :</h6>
                                         <ul class="list-group list-group-flush mb-4">
                                             <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                <p class="mb-0 fw-semibold text-dark w-50">Numéro de stage :</p>
-                                                <span class="text-end text-dark"><?=$valeur['id'] ?></span>
+                                                <p class="mb-0 fw-semibold text-dark w-50">Numéro de l'offre :</p>
+                                                <span class="text-end text-dark"><?=$valeur['id_offre'] ?></span>
                                             </li>
                                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                                 <p class="mb-0 fw-semibold text-dark w-50">Objet de l'offre :</p>
@@ -134,6 +134,7 @@ $listeTuteur = entreprise::toutTuteur($_SESSION['entreprise_id']);
                                         <input type="hidden" name='competence_etudiant' value='<?=$valeur['competence_etudiant'] ?>'>
                                         <input type="hidden" name='nomTuteur' value='<?=$tuteur['nomTuteur'] ?>'>
                                         <input type="hidden" name='idTuteur' value='<?=$tuteur['id'] ?>'>
+                                        <input type="hidden" name='id_offre' value='<?=$valeur['id_offre'] ?>'>
                                         <input type="hidden" name='id_etud' value='<?=$valeur['id_etud'] ?>'>
                                         <button class="btn btn-dark w-100 fw-bold mt-2" name="assigner" type="submit" 
                                             <?php echo empty($listeTuteur) ? 'disabled' : ''; // Désactiver si pas de tuteur ?>>
