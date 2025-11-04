@@ -128,7 +128,18 @@ session_start();
             $bdd = config::connexion();
 
             //recheche
-            $req = $bdd->prepare('SELECT * FROM candidatures');
+            $req = $bdd->prepare('SELECT candidatures.id as id_cand, 
+                                        etudiants.nom as nom_etud,
+                                        entreprises.nom as nom_entreprise,
+                                        offres_stage.titre as titre_ofrre,
+                                        candidatures.statut as cand_statut
+                                        FROM candidatures
+                                        inner join etudiants
+                                        on etudiants.id = candidatures.etudiant_id
+                                        inner join offres_stage
+                                        on offres_stage.id =candidatures.offre_id
+                                        inner join entreprises
+                                        on entreprises.id = offres_stage.entreprise_id ');
             $req->execute();
             $res = $req->fetchAll();
             return $res;

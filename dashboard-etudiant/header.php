@@ -1,6 +1,6 @@
 <?php
-// PHP Logique pour savoir quelle est la page active (optionnel, mais recommandé)
-$current_page = basename($_SERVER['PHP_SELF']);
+//réccupération de la page active
+$page_active = basename($_SERVER['PHP_SELF']);
 ?>
 
 <header class="d-flex flex-column flex-shrink-0 p-3 bg-white border-end vh-100" style="width: 350px;">
@@ -11,24 +11,40 @@ $current_page = basename($_SERVER['PHP_SELF']);
     <ul class="nav nav-pills flex-column mb-auto">
         
         <li class="nav-item mb-1">
-            <a href="index.php" class="nav-link 
-                <?php echo ($current_page == 'index.php') ? 'active bg-dark text-white' : 'text-dark link-dark'; ?>" 
-                aria-current="page">
+            <a href="index.php" class="nav-link text-dark " 
+            aria-current="page">
                 <i class="bi bi-speedometer2 me-2"></i>
                 DASHBOARD <span class="fw-normal">ÉTUDIANT</span>
             </a>
         </li>
 
         <li class="nav-item">
-            <a href="" class="nav-link text-dark link-dark">
+            <a href="index.php" class="nav-link <?php echo ($page_active == 'index.php') ? 'active bg-dark text-white' : 'text-dark link-dark'; ?> text-dark link-dark">
                 <i class="bi bi-search me-2"></i>
                 Rechercher un stage
             </a>
         </li>
         <li class="nav-item">
-            <a href="etat_candidature.php" class="nav-link text-dark link-dark">
+            <a href="etat_candidature.php" class="nav-link
+                <?php echo ($page_active == 'etat_candidature.php') ? 'active bg-dark text-white' : 'text-dark link-dark'; ?> text-dark link-dark">
                 <i class="bi bi-search me-2"></i>
                 Etat candidatures
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="depotRapport.php" class="nav-link 
+            <?php echo ($page_active == 'depotRapport.php') ? 'active bg-dark text-white' : 'text-dark link-dark'; ?>
+             text-dark link-dark">
+                <i class="bi bi-search me-2"></i>
+                Dépot Rapoort
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="AjoutProf.php" class="nav-link 
+            <?php echo ($page_active == 'AjoutProf.php') ? 'active bg-dark text-white' : 'text-dark link-dark'; ?>
+             text-dark link-dark">
+                <i class="bi bi-search me-2"></i>
+                Ajouter Professeur
             </a>
         </li>
         
@@ -46,6 +62,6 @@ $current_page = basename($_SERVER['PHP_SELF']);
     </div>
 
     <div class="text-center mt-2 pt-2 border-top small text-muted">
-        &copy;smart tous droits réservés
+        &copy;StageWorkFlow tous droits réservés
     </div>
 </header>

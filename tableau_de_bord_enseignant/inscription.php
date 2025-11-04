@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="favicon.png" href="../assets/images/logo.PNG">
     <link href="../assets/css/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <title>Inscription Enseignant</title>
@@ -34,26 +35,26 @@
                     
                     <hr class="text-secondary">
                     
-                    <form action="../pages/root.php" method="POST" class="needs-validation" novalidate>
+                    <form action="../pages/root.php" method="POST" class="needs-validation" autocomplete="off" povalidate>
                         
                         <div class="mb-3">
-                            <input class="form-control" type="text" name="nom" placeholder="Nom complet" required>
+                            <input class="form-control" type="text" name="nom" autocomplete="off" placeholder="Nom complet" required>
                         </div>
                         
                         <div class="mb-3">
-                            <input class="form-control" type="text" name="cours" placeholder="matière (EX: python, UML,...  )" required>
+                            <input class="form-control" type="text" name="cours" autocomplete="off" placeholder="matière (EX: python, UML,...  )" required>
                         </div>
                         
                         <div class="mb-3">
-                            <input class="form-control" type="email" name="mail" placeholder="votre mail" required>
+                            <input class="form-control" type="email" name="mail" pattern='^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}' autocomplete="off" placeholder="votre mail" required>
                         </div>
                         
                         <div class="mb-3">
-                            <input class="form-control" type="password" name="mdpa" placeholder="Mot de passe" required>
+                            <input class="form-control" type="password" name="mdpa" autocomplete="off" placeholder="Mot de passe" required>
                         </div>
                         
                         <div class="mb-4">
-                            <input class="form-control" type="password" name="mdpb" placeholder="Confirmer le mot de passe" required>
+                            <input class="form-control" type="password" name="mdpb" autocomplete="off" placeholder="Confirmer le mot de passe" required>
                         </div>
                         
                         <div class="d-grid gap-2">

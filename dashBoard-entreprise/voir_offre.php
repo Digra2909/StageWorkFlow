@@ -1,11 +1,12 @@
 <?php
-session_start();
-if(!isset($_SESSION['entreprise_id'])){
-    header('location:../pages/connexion.php');
-}
-include('../config.php');
-config::autoload();
-$listeOffre = entreprise::voir_offre($_SESSION['entreprise_id']);
+    session_start();
+
+    if(!isset($_SESSION['entreprise_id'])){
+        header('location:../pages/connexion.php');
+    }
+    include('../config.php');
+    config::autoload();
+    $listeOffre = entreprise::voir_offre($_SESSION['entreprise_id']);
 
 
 ?>
@@ -15,6 +16,7 @@ $listeOffre = entreprise::voir_offre($_SESSION['entreprise_id']);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../assets/css/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="shortcut icon" type="favicon.png" href="../assets/images/logo.PNG">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <title>Mes Offres</title>
 </head>
@@ -50,7 +52,7 @@ $listeOffre = entreprise::voir_offre($_SESSION['entreprise_id']);
                             default => 'bg-secondary',
                         };
                         
-                        // Petite fonction pour tronquer la description si elle est trop longue
+                        // tronquer la valeur de la description
                         $description_courte = strlen($valeur['descriptions']) > 100 ? substr($valeur['descriptions'], 0, 100) . '...' : $valeur['descriptions'];
                 ?>
                         <div class="col-md-6 col-lg-4"> <div class="card shadow-sm h-100 bg-white border-0">

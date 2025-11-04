@@ -14,6 +14,7 @@ $state_valid = $_SESSION['state_valide'] ?? '';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="favicon.png" href="../assets/images/logo.PNG">
     <link href="../assets/css/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <title>Publier une Offre</title>

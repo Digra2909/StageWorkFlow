@@ -10,6 +10,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="shortcut icon" type="favicon.png" href="../assets/images/logo.PNG">
     <link href="../assets/css/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- <link rel="stylesheet" href="../assets/css/style.css"> -->
     <title>Valider Candidatures</title>
@@ -37,7 +38,7 @@
             <div>
                 <select class='form-control w-100' name="candidature" id="">
                     <?php  foreach($listeCandidature as $candidature){ ?>
-                        <option  value="<?php echo $candidature['id'] ?>" ><?php echo $candidature['id'] ?></option>
+                        <option  value="<?php echo $candidature['id_cand'] ?>" ><?php echo $candidature[3] ?></option>
                     <?php }    ?>
                 </select>
                 <input type="submit" name='ValiderCandidature' value="valider" class='form-control btn orange'>
@@ -50,16 +51,20 @@
             <tfoot></tfoot>
             <thead class='sticky-top'>
                 <tr>
-                    <th scope='col'>id</th>
-                    <th scope='col'>statut</th>
+                    <th scope='col'>Nom étudiant</th>
+                    <th scope='col'>Nom entreprise</th>
+                    <th scope='col'>Titre offre</th>
+                    <th scope='col'>Statut candidatue</th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach($listeCandidature as $S) { ?>
                
                 <tr>
-                    <td><?=$S[0] ?></td>
                     <td><?=$S[1] ?></td>
+                    <td><?=$S[2] ?></td>
+                    <td><?=$S[3] ?></td>
+                    <td><?=$S[4] ?></td>
                 </tr>
 
                 <?php }    ?>

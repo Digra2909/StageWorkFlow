@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../assets/css/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    
+    <link rel="shortcut icon" type="favicon.png" href="../assets/images/logo.PNG">
     <title>Inscription Étudiant</title>
 </head>
 <body class="bg-light d-flex align-items-center justify-content-center vh-100">
@@ -42,26 +42,30 @@
                         <div class="mb-3">
                             <div class="input-group">
                                 <span class="input-group-text bg-light text-dark border-end-0"><i class="bi bi-person-fill"></i></span>
-                                <input class="form-control" type="text" name="nom" placeholder="Votre nom complet" required>
+                                <input class="form-control" type="text" name="nom" placeholder="Votre nom complet" autocomplete="off" required>
                             </div>
                         </div>
                         
                         <div class="mb-3">
                             <div class="input-group">
                                 <span class="input-group-text bg-light text-dark border-end-0"><i class="bi bi-calendar-check-fill"></i></span>
-                                <input class="form-control" type="text" name="promo" placeholder="Votre promotion (ex: L3, Master 1)" required>
+                                <select name="promo" id="" class='form-control'>
+                                    <option value="L1">L1</option>
+                                    <option value="M0">M0</option>
+                                    <option value="M1">M1</option>
+                                </select>
                             </div>
                         </div>
                         
                         <div class="mb-3">
                             <label for="cv-file" class="form-label text-secondary small mb-1">Votre CV (format PDF uniquement)</label>
-                            <input class="form-control" type="file" name="cv" id="cv-file" accept=".pdf">
+                            <input class="form-control" type="file" name="cv" autocomplete="off" id="cv-file" accept=".pdf">
                         </div>
                         
                         <div class="mb-3">
                             <div class="input-group">
                                 <span class="input-group-text bg-light text-dark border-end-0"><i class="bi bi-tools"></i></span>
-                                <input class="form-control" type="text" name="comp" placeholder="Vos compétences (séparées par des virgules)" required>
+                                <input class="form-control" type="text" name="comp" autocomplete="off" placeholder="Vos compétences (séparées par des virgules)" required>
                             </div>
                         </div>
                         
@@ -75,7 +79,7 @@
                         <div class="mb-4">
                             <div class="input-group">
                                 <span class="input-group-text bg-light text-dark border-end-0"><i class="bi bi-lock-fill"></i></span>
-                                <input class="form-control" type="password" name="mdp2" placeholder="Confirmer votre mot de passe" required>
+                                <input class="form-control" type="password" name="mdp2" autocomplete="off" placeholder="Confirmer votre mot de passe" required>
                             </div>
                         </div>
                         

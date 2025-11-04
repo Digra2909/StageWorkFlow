@@ -35,6 +35,14 @@ $current_page = basename($_SERVER['PHP_SELF']);
         </li>
         <hr>
         <li class="nav-item">
+            <a href="inscriptionEse.php" class="nav-link 
+                <?php echo ($current_page == 'inscriptionEse.php') ? 'active bg-dark text-white' : 'text-dark'; ?>">
+                <i class="bi bi-briefcase me-2"></i>
+                Inscrire Entreprise
+            </a>
+        </li>
+        <hr>
+        <li class="nav-item">
             <a href="valider_candidature.php" class="nav-link 
                 <?php echo ($current_page == 'valider_candidature.php') ? 'active bg-dark text-white' : 'text-dark'; ?>">
                 <i class="bi bi-person-check me-2"></i>

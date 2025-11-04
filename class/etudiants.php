@@ -13,40 +13,56 @@
         //fonction  Ajout entreprise:
       
         public static function AjouterProfil($data){
-            
             $espion = FALSE;
 
-            //se connecter à la base des données
+            // 1. Connexion à la base de données
             $bdd = config::connexion();
 
-            $fichier =$_FILES['cv'];
+            
+            if (!isset($_FILES['cv']) || $_FILES['cv']['error'] !== UPLOAD_ERR_OK) {
+        
+                return $espion; 
+            }
+            
+            $fichier = $_FILES['cv'];
+            $dossier = '../assets/fichiers/pdfs/';
 
-            $dossier = '../assets/fichiers/';
-            $chemin = $dossier.basename($fichier['name']);
-            //echo $chemin;exit;
 
-            if(move_uploaded_file($fichier['tmp_name'],$chemin)){
-               
+            $nom_fichier_unique = uniqid() . '_' . basename($fichier['name']);
+            $chemin = $dossier . $nom_fichier_unique;
 
-                $sql = $bdd->prepare('INSERT INTO users(nomuser,mdp) VALUES(?,?)');
-                $sql->execute(array($data[0],$data[4]));
+            if(move_uploaded_file($fichier['tmp_name'], $chemin)){
+                    
 
-                $sql2 = $bdd->query('SELECT id FROM users order by id desc LIMIT 1');
-                $a = $sql2->fetch();
-                
-                //enregistrement
-                $req = $bdd->prepare(  
-                                        'INSERT INTO etudiants(nom,promo,cv_path,competences,user_id) 
-                                        VALUES(?,?,?,?,?)'
-                                    );
-                $espion = $req->execute(array($data[0],$data[1],$chemin,$data[3],$a[0]));
+                try {
 
-                if($espion){ return $espion = TRUE; }
+                    $sql = $bdd->prepare('INSERT INTO users(nomuser, mdp) VALUES(?, ?)');
+                    $sql->execute(array($data[0], $data[4]));
+                    
 
+                    $user_id = $bdd->lastInsertId();
+
+                    if ($user_id) {
+        
+                        $req = $bdd->prepare(  
+                                                'INSERT INTO etudiants(nom, promo, cv_path, competences, user_id) 
+                                                VALUES(?, ?, ?, ?, ?)'
+                                            );
+                        $espion = $req->execute(array($data[0], $data[1], $chemin, $data[3], $user_id));
+                    }
+                    
+                } catch (PDOException $e) {
+
+                    $espion = FALSE;
+                }
+
+            } else {
+
+                $espion = FALSE;
             }
 
-            
-        }
+            return $espion;
+}
         public static function rechercherOffre($data){
 
 
@@ -103,10 +119,55 @@
             $req->execute([$idCand]);
 
         }
-        public static function depotRapport(){
+        public static function depotRapport($data){
+            $espion = FALSE;
 
+            // 1. Connexion à la base de données
+            $bdd = config::connexion();
+
+            
+            if (!isset($_FILES['rapport']) || $_FILES['rapport']['error'] !== UPLOAD_ERR_OK) {
+                return $espion; 
+            }
+            
+            $fichier = $_FILES['rapport'];
+            $dossier = '../assets/fichiers/rapport/';
+
+
+            $monRapport = uniqid() . '_' . basename($fichier['name']);
+            $chemin = $dossier . $monRapport;
+            
+            if(move_uploaded_file($fichier['tmp_name'], $chemin)){
+          
+
+                try {
+                
+                    $sql = $bdd->prepare('INSERT INTO rapport(path_rapport,etudiant_id) VALUES(?,?)');
+                    $sql->execute(array($chemin,$data[1]));
+                    $espion = TRUE;
+                    
+                } catch (PDOException $e) {
+
+                    echo $e ;
+                }
+
+            } else {
+
+                $espion = FALSE;
+            }
+            return $espion;
         }
-        
+        public static function AjoutProf($donnee){
+            // var_dump($donnee);exit;
+            //se connecter à la base des données
+            $bdd = config::connexion();
+
+            $requete = $bdd->prepare('UPDATE etudiants 
+                                        SET enseignant_mail = ?
+                                        WHERE id =  ? ');
+            $res = $requete->execute($donnee);
+            return $res;
+        }
         
     }
 

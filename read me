@@ -1,6 +1,62 @@
-travaux à de correction
+# 🎓 Plateforme de Gestion de Stages et d'Évaluations StageWorkflow
 
--remplacer les header par la fonction de redirection 
--créer des constantes pour le sfichiers statics
--affiché l'etat de stage des étudiants par rapport à à l'enseigant
--dépôt de stage
+## 📄 Introduction
+
+Ce projet est une application web conçue pour structurer et fluidifier le processus de gestion des stages en entreprise, de la publication des offres à l'évaluation finale des étudiants. Il est divisé en plusieurs interfaces utilisateur distinctes pour les Entreprises, les Tuteurs, les Enseignants et les Stagiaires.
+
+L'interface utilisateur a été développée en adoptant un design moderne, basé sur un thème **Blanc dominant avec des accents Noirs (Dark)**, en utilisant le framework **Bootstrap** pour assurer la réactivité et la cohérence visuelle.
+
+---
+
+## ✨ Fonctionnalités Clés
+
+Le système couvre l'intégralité du cycle de vie du stage :
+
+### 1. Gestion Administrative (Entreprise)
+* Création d'Offres : Publication d'offres de stage détaillées.
+* Gestion des Tuteurs : Enregistrement et gestion du personnel interne chargé de l'encadrement des stagiaires.
+* Gestion des Candidatures :** Visualisation, acceptation ou rejet des candidatures d'étudiants.
+* Assignation : Attribution d'un Tuteur à une candidature acceptée pour formaliser l'encadrement.
+* Finalisation de Stage : Définition des dates de début et de fin pour créer la fiche de stage officielle.
+
+### 2. Évaluation (Tuteur)
+* Liste des Stagiaires : Vue des stagiaires assignés pour l'évaluation.
+* Système de Cotation : Formulaire détaillé pour noter le stagiaire sur plusieurs critères (Connaissances, Rendement, Discipline, Collaboration, etc.).
+* Suivi du Statut : Affichage visuel du statut du stage (ex. : `ÉVALUÉ` avec bordure verte) pour un suivi rapide.
+
+### 3. Suivi Académique (Enseignant)
+* Vue d'Ensemble : Liste des stages sous la supervision de l'enseignant.
+* Détails et Notes : Accès aux fiches complètes incluant les informations de l'étudiant et les résultats détaillés de l'évaluation du tuteur (moyenne par critère).
+
+### 4. Interface Stagiaire
+* Dépôt de Documents : Formulaire dédié au dépôt du rapport de stage (format PDF).
+* Contact Enseignant : Formulaire simple pour soumettre l'adresse e-mail de l'enseignant encadreur.
+
+---
+
+## 🛠️ Stack Technique
+
+* Backend : PHP (avec POO, utilisant des sessions pour l'authentification).
+* Base de Données : MySql.
+* Frontend : HTML5, CSS3, **Bootstrap 5.x**.
+* Icônes : Bootstrap Icons.
+
+---
+
+## 🎨 Design et Conventions
+
+Le projet suit des conventions de design strictes :
+
+* Thème : Moderne, basé sur la clarté.
+    * Couleur Principale : Blanc (`bg-white`) pour les cartes et le fond.
+    * Couleur d'Accentuation : Noir (`btn-dark`, `text-dark`) pour les actions principales et le texte.
+    * Couleurs de Statut : Utilisation cohérente des badges (ex. : Vert `bg-success` pour `ÉVALUÉ` ou `ACCEPTÉE`).
+* Mise en Page : Utilisation du modèle **Barre Latérale (`header.php`) et Contenu Principal (`<main>`) avec Flexbox 
+* Formulaires : Utilisation systématique des `input-group` avec icônes pour améliorer l'expérience utilisateur.
+
+---
+
+
+## 🤝 Contribution
+
+Pour toute question, amélioration ou rapport de bug, veuillez contacter gradikidimba299@gmail.com.

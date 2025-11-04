@@ -1,12 +1,12 @@
 <?php
-session_start();
-if(!isset($_SESSION['idTuteur'])){
-    header('location:../pages/connexion.php');
-}
-include('../config.php');
-config::autoload();
-$listeStagiaire = entreprise::recupereStage($_SESSION['idTuteur']);
-// var_dump($listeStagiaire);exit;
+    session_start();
+    if(!isset($_SESSION['idTuteur'])){
+        header('location:../pages/connexion.php');
+    }
+    include('../config.php');
+    config::autoload();
+    $listeStagiaire = entreprise::recupereStage($_SESSION['idTuteur']);
+    // var_dump($listeStagiaire);exit;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,6 +14,7 @@ $listeStagiaire = entreprise::recupereStage($_SESSION['idTuteur']);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../assets/css/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="shortcut icon" type="favicon.png" href="../assets/images/logo.PNG">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <title>Évaluation Stagiaire</title>
 </head>
@@ -75,7 +76,7 @@ $listeStagiaire = entreprise::recupereStage($_SESSION['idTuteur']);
                                     <p class="card-text text-secondary small flex-grow-1">
                                         Cliquez pour procéder à la notation de ce stagiaire.
                                     </p>
-                                    <p><?php echo ($val['statut_stg'] === 'évalué') ? ($moy = entreprise::afficher_moyenne([$_SESSION['idTuteur'],$val['id_etudiant'],$val['id_stage']])).'/20' : ''; ?></p>
+                                    <p><?php echo ($val['statut_stg'] === 'évalué') ? ( $moy = entreprise::afficher_moyenne([$_SESSION['idTuteur'],$val['id_etudiant'],$val['id_stage']])).'/20' : ''; ?></p>
                                     
                                     <input type="hidden" name='id_etudiant' value='<?php echo $val['id_etudiant'] ?>'>
                                     <input type="hidden" name='id_stage' value='<?php echo $val['id_stage'] ?>'>
@@ -97,7 +98,7 @@ $listeStagiaire = entreprise::recupereStage($_SESSION['idTuteur']);
                 </div>
                 
                 <div class="col-12 text-center mt-5">
-                    <a href="../pages/connexion.php" class="text-dark text-decoration-none fw-semibold">
+                    <a href="../tuerSession.php" class="text-dark text-decoration-none fw-semibold">
                         <i class="bi bi-arrow-left me-2"></i>
                         Quitter la session
                     </a>

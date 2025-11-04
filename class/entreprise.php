@@ -254,19 +254,26 @@
                                         ,id_stage
                                         ,moyenneCote)
                                 VALUES(?,?,?,?,?,?,?,?,?,?,?)');
-            //les id etrangères 
-            $valeur = array_slice($data,-3);
-            
-            //les côtes du stage
-            $note = array_diff($data,$valeur);
-
-            //calculer la moyenne des notes
+            $note = [
+                        $data['conProf'],
+                        $data['rendemnt'],
+                        $data['esprInit'],
+                        $data['ponct_disp'],
+                        $data['travEquip'],
+                        $data['consProf'],
+                        $data['compGen']
+            ];
+            // echo 'les notes :';
+            // var_dump($note);exit;
+            // 
             $moyenne = moyenneCote($note);
 
             //ajouter les id et la moyenne au tableau final
-            $array_final = array_merge($note,$valeur);
-
-            array_push($array_final,$moyenne);
+            $array_final = array_merge($note,[$data['idTut'],$data['idEtd'],$data['idStg']]);
+            echo 'les notes :';
+            // var_dump($array_final);exit;
+            
+            $array_final = array_merge($array_final,['moyenne'=>$moyenne]);
             // foreach ($array_final as $key => $value) {
             //     echo $key.'==>'.$value.'</br>';
             // }exit;
@@ -281,13 +288,16 @@
                                         $array_final[7],
                                         $array_final[8],
                                         $array_final[9],
-                                        $array_final[10]
+                                        $array_final['moyenne']
                                         
                                     ));
 
             if($res){
-                    $req = $bdd->prepare("UPDATE stages SET statut='évalué' where id= ?");
-                    $req->execute(array($array_final[7]));  
+                    
+                    $req = $bdd->prepare("UPDATE stages 
+                                            SET statut = 'évalué'
+                                            WHERE id = ?");
+                    $req->execute(array($array_final[9]));  
             }
         }
         public static function recupereStage($idTuteur){
@@ -303,6 +313,7 @@
                                     inner join stages 
                                     on stages.etudiant_id = etudiants.id 
                                     INNER join tuteur 
+                                    on stages.tuteur_id=tuteur.id
                                     where tuteur.id = ?
                                     ');
             $req->execute(array($idTuteur));
@@ -326,9 +337,7 @@
             return $moyenne[0];
                                     
         }
-        public static function etudiantAevaluer($data){
-            
-        }
+
     }
 
 
